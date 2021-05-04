@@ -1,6 +1,8 @@
 export const entropy = (x) => {
   const l = x.reduce((acc, cur) => acc+parseFloat(cur), 0.0);
-
+  if (x.includes("0") || x.includes(0)) {
+    return 0;
+  }
   return -x.reduce((acc, cur) => {
     return acc + (parseFloat(cur)/l)*Math.log2((parseFloat(cur)/l))
   }, 0);
