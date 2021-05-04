@@ -21,7 +21,7 @@
               Weighted Sum: {{weightedSum}}
             </v-col>
             <v-col cols="12">
-              IG: {{calculatedEntropy}}-{{weightedSum}}={{informationGain}}
+              IG: {{informationGain}}
             </v-col>
           </template>
         </v-row>
