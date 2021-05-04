@@ -9,7 +9,7 @@
 </template>
 
 <script>
-//import Entropy from './components/Entropy'
+// import Entropy from './components/Entropy'
 // import Variance from './components/Variance'
 // import Gini from "@/components/Gini";
 //import LinearRegression from "@/components/LinearRegression";
@@ -18,7 +18,7 @@ import GradientDescent from "@/components/GradientDescent";
 export default {
   name: 'App',
   components: {
-    //Entropy,
+    // Entropy,
     // Variance,
     // Gini,
     //  LinearRegression,

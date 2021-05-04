@@ -98,20 +98,26 @@ export default {
     },
     updateWeights() {
 
-      this.rowArray = [['3.2','4.4','6.2'],["50.4","56.7", "63.4"]];
-      this.rowArray.unshift(Array(this.rowArray[0].length).fill(1));
+      this.rowArray.unshift(Array(this.rowArray[0].length).fill(1.0));
       this.inputMwd.forEach((val, index) => {
         let calcValue = 0;
         this.inputTargetFeature.forEach((value, idx) => {
-          calcValue +=(( parseFloat(value) - parseFloat(this.inputPrediction[idx]))*parseFloat(this.rowArray[index][idx]))
+          let error = 0;
+          if(this.inputError.length > 0) {
+            error = parseFloat(this.inputError[idx]);
+          } else  {
+            error = (parseFloat(value) - parseFloat(this.inputPrediction[idx]))
+          }
+
+          calcValue +=(( parseFloat(error) )*parseFloat(this.rowArray[index][idx]))
         })
-        this.errorDelta.push(calcValue.toFixed(2));
+        this.errorDelta.push(calcValue.toFixed(5));
       });
 
 
      this.updatedWeights = this.errorDelta.map((value, idx)=>{
         const test1 = parseFloat(this.inputMwd[idx]);
-        const test2 = (parseFloat(this.learningRate)*(parseFloat(value))).toFixed(2);
+        const test2 = (parseFloat(this.learningRate)*(parseFloat(value))).toFixed(5);
         const test3 = parseFloat(test1)+parseFloat(test2);
         return test3
       });

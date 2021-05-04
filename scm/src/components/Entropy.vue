@@ -99,14 +99,24 @@ export default {
       this.tableElements = this.inputAttributeArray.reduce((acc, cur) => {
         return acc + cur.reduce((acc1, cur1) => acc1 + parseInt(cur1), 0)
       },0);
+
       this.entropyAttributArray.forEach((val, idx) => {
-        this.weightedSum = parseFloat(this.weightedSum) +
-            (parseFloat(val) * parseFloat((this.inputAttributeArray[idx].reduce((acc1, cur1) => parseFloat(acc1) + parseInt(cur1), 0))/parseFloat(this.tableElements))).toFixed(2)
-      });
-      this.informationGain = this.calculatedEntropy - this.weightedSum;
+        const additiert = this.inputAttributeArray[idx].reduce((acc, cur) => acc+parseFloat(cur),0);
+        console.log('additiert', additiert);
+        const anteil = (parseFloat(additiert)/parseFloat(this.tableElements)) ;
+        this.weightedSum = (parseFloat(this.weightedSum) + parseFloat(val)*parseFloat(anteil)).toFixed(4);
+        console.log('anteil', anteil, "entropy", val, this.weightedSum);
+      })
+      this.informationGain = (this.calculatedEntropy - this.weightedSum).toFixed(4);
     },
     resetRows() {
-      //
+      this.numberAttributes = 0;
+      this.attributeArray = [];
+      this.inputAttributeArray = [];
+      this.entropyAttributArray= [];
+      this.weightedSum= 0;
+      this.tableElements= 0;
+      this.informationGain= 0;
     }
   }
 }
